@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="es"><head>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Hera, la mayor comunidad sobre salud</title>
+        <title>Comparte y busca a los mejores especialistas médicos de tu localidad</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -156,7 +156,7 @@
                     <div class="col-md-12">
                         <div class="logo text-center">
                             <h1>Buscar un doctor/a</h1>
-                            <span>Entra y forma parte de la mayor plataforma sobre salud de toda la red</span>
+                            <span>Comparte y busca a los mejores especialistas médicos de tu localidad</span>
                         </div>
                     </div>
                 </div>

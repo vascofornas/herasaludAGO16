@@ -197,7 +197,49 @@ while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData[] = $estado."/".$pais;
 	
 	if ($row["lo_recomendarias"]>0){
-	$nestedData[] = $row["lo_recomendarias"];
+	
+	
+	$recomendarias_doctor =  $row["lo_recomendarias"];
+	if ($recomendarias_doctor ==""  ){
+		$grafico_recomendarias = 	"0.png";
+	}
+	if ($recomendarias_doctor <= 0.5 ){
+		$grafico_recomendarias = 	"05.png";
+	}
+	if ($recomendarias_doctor <= 1 && $recomendarias_doctor > 0.5  ){
+		$grafico_recomendarias = 	"1.png";
+	}
+	if ($recomendarias_doctor <= 1.5 && $recomendarias_doctor > 1  ){
+		$grafico_recomendarias = 	"15.png";
+	}
+	if ($recomendarias_doctor <= 2 && $recomendarias_doctor > 1.5  ){
+		$grafico_recomendarias = 	"2.png";
+	}
+	if ($recomendarias_doctor <= 2.5 && $recomendarias_doctor > 2  ){
+		$grafico_recomendarias = 	"25.png";
+	}
+	
+	if ($recomendarias_doctor <= 3 && $recomendarias_doctor > 2.5  ){
+		$grafico_recomendarias = 	"3.png";
+	}
+	if ($recomendarias_doctor <= 3.5 && $recomendarias_doctor > 3  ){
+		$grafico_recomendarias = 	"35.png";
+	}
+	
+	if ($recomendarias_doctor <= 4 && $recomendarias_doctor > 3.5  ){
+		$grafico_recomendarias = 	"4.png";
+	}
+	if ($recomendarias_doctor <= 4.5 && $recomendarias_doctor > 4  ){
+		$grafico_recomendarias = 	"45.png";
+	}
+	
+	if ($recomendarias_doctor <= 5 && $recomendarias_doctor > 4.5  ){
+		$grafico_recomendarias = 	"5.png";
+	}
+	
+	
+	$nestedData[] = '<img src="imagenes/'. $grafico_recomendarias.'" width="100%" height="">';
+	
 	}
 	else {
 	$nestedData[] = "No hay datos";

@@ -247,7 +247,7 @@ while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	
 	if(!empty($row['latitud_doctor']) && !empty($row['longitud_doctor'])){
 	
-	$distancia_doctor =  $row['distance'];
+	$distancia_doctor = number_format((double)$row['distance'], 2, '.', '');
 	
 	}
 	else {

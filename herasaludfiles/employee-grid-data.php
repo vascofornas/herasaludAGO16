@@ -214,7 +214,7 @@ while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	
 	$nestedData[] = $distancia_doctor;
 	
-	$mostrar = '<td><a href="datos_doctor.php?id='.encrypt_decrypt('encrypt', ($row['id_doctor'])).'" class="btn btn-info btn-large"  >Ver ficha del doctor/a</a></td>';
+	$mostrar = '<td><a href="datos_doctor.php?id='.encrypt_decrypt('encrypt', ($row['id_doctor'])).'" class="btn btn-info btn-large"  >Ver ficha del doctor</a></td>';
 	
 	
 	$nestedData[] = $mostrar ;

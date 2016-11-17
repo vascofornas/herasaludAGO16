@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
-    <head>
+<html lang="en"><head>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,8 +25,10 @@
        <!-- <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'> -->
         <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 
-
+		
+		
         <!-- Template js -->
+
         <script src="js/jquery-2.1.1.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/jquery.appear.js"></script>
@@ -36,7 +36,47 @@
         <script src="js/jqBootstrapValidation.js"></script>
         <script src="js/modernizr.custom.js"></script>
         <script src="js/script.js"></script>
+        
+        
 
+       
+        <!-- recursos datatable-->
+<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+
+		<link rel="stylesheet" type="text/css" href="css/dataTables.colVis.css">
+<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+		<script type="text/javascript" language="javascript" src="js/dataTables.colVis.js"></script>
+        <script >
+		  console.log('start');
+  
+  $('#myModal').on('show.bs.modal', function(e) {
+    var rowid = $(e.relatedTarget).data('id');
+    
+    console.log('bs-modal event');
+
+    $.ajax({
+      type: 'post',
+      url: 'info-doctor.php', //Here you will fetch records 
+      data: 'rowid=' + rowid //Pass $id
+    }).done(function(data) {
+        $('.fetched-data').html(data); //Show fetched data from database
+        console.log("succss", rowid);
+        console.log("data", data);
+    }).fail(function() {
+    	  console.log(arguments);
+    })
+  });
+		</script>
+		
+		<style media="screen" type="text/css">
+
+
+
+</style>
+		
+
+    
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -45,16 +85,156 @@
     </head>
     
     <body>
-        
+    
+     <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Data</h4>
+            </div>
+            <div class="modal-body">
+                <div class="fetched-data"></div> //Here Will show the Data
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
         <!-- Start Logo Section -->
         <section id="logo-section" class="text-center">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logo text-center">
-                            <h1>Doctores</h1>
+                            <h1>Opinar de un doctor</h1>
                             <span>Comparte y busca a los mejores especialistas médicos de tu localidad</span>
                         </div>
+                        
+                         <h2>Opinar de un doctor:</h2>
+  <p>Usa este formulario para opinar de un doctor:</p>
+ <form role="form">
+ <div class="form-group">
+ <label for="name">Especialidad MÃ©dica</label>
+ <select class="form-control">
+ <option>1</option>
+ <option>2</option>
+ <option>3</option>
+ <option>4</option>
+ <option>5</option>
+ </select>
+ <br>
+ <div class="row">
+  	<div class="col-xs-4">
+   		<label for="name">Nombre</label>
+    	<input type="text" class="form-control" placeholder="Nombre">
+  </div>
+  <div class="col-xs-4">
+   <label for="name">Apellido 1</label>
+    <input type="text" class="form-control" placeholder="Apellido 1">
+  </div>
+  <div class="col-xs-4">
+   <label for="name">Apellido 2</label>
+    <input type="text" class="form-control" placeholder="Apellido 2">
+  </div>
+</div>
+<br>
+ <div class="row">
+  	<div class="col-xs-2">
+   		<label for="name">Pais</label>
+ <select class="form-control">
+ <option>1</option>
+ <option>2</option>
+ <option>3</option>
+ <option>4</option>
+ <option>5</option>
+ </select>
+  </div>
+  <div class="col-xs-2">
+   		<label for="name">Estado</label>
+ <select class="form-control">
+ <option>1</option>
+ <option>2</option>
+ <option>3</option>
+ <option>4</option>
+ <option>5</option>
+ </select>
+  </div>
+  <div class="col-xs-2">
+   		<label for="name">Ciudad</label>
+ <select class="form-control">
+ <option>1</option>
+ <option>2</option>
+ <option>3</option>
+ <option>4</option>
+ <option>5</option>
+ </select>
+  </div>
+  <div class="col-xs-4">
+   <label for="name">Calle <small><em>no obligatorio</em></small></label>
+    <input type="text" class="form-control" placeholder="Calle">
+  </div>
+  
+  <div class="col-xs-2">
+   <label for="name">NÃºmero <small><em>no obligatorio</em></small></label>
+    <input type="text" class="form-control" placeholder="NÃºmero">
+  </div>
+</div>
+<br>
+ <div class="row">
+<div class="col-xs-6">
+<label for="input-5" class="control-label">Puntualidad</label>
+<input id="input-5" class="rating-loading" data-show-clear="false" data-show-caption="true">
+<script>
+$(document).on('ready', function(){
+    $('#input-5').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+</div>
+<div class="col-xs-6">
+<label for="input-6" class="control-label">AtenciÃ³n</label>
+<input id="input-6" class="rating-loading" data-show-clear="false" data-show-caption="true">
+<script>
+$(document).on('ready', function(){
+    $('#input-6').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+</div>
+</div>
+<br>
+ <div class="row">
+<div class="col-xs-6">
+<label for="input-7" class="control-label">Instalaciones</label>
+<input id="input-7" class="rating-loading" data-show-clear="false" data-show-caption="true">
+<script>
+$(document).on('ready', function(){
+    $('#input-7').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+</div>
+<div class="col-xs-6">
+<label for="input-8" class="control-label">Precio</label>
+<input id="input-8" class="rating-loading" data-show-clear="false" data-show-caption="true">
+<script>
+$(document).on('ready', function(){
+    $('#input-8').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+</div>
+</div>
+ <div class="row">
+<div class="col-xs-12">
+ 
+   <label for="name">Comentarios</label>
+   <textarea rows="3" class="form-control" placeholder="Comentarios"></textarea>
+  
+  </div></div>
+</form>
+
+                        
                     </div>
                 </div>
             </div>
@@ -79,39 +259,52 @@
                         </div> 
                         <!-- FIN DIV CLASS MENU ITEM  BLUE--DOCTORES -->
                   </div>
-                  </div>
-                <div class="row"><!-- ROW 001-->
-                           <div class="col-md-6">
-                        <!--  COL MD 6 001-->
-
-                        <div class="menu-item color-hospital"> <!-- DIV CLASS MENU ITEM BLUE--DOCTORES -->
-
-                            <a href="opinar_doctor.html" >
-                                <i class="fa fa-comment-o"></i>
-                                <h3>Opinar de un doctor</h3>
-                            </a>
-                        </div> 
-                        <!-- FIN DIV CLASS MENU ITEM  BLUE--DOCTORES -->
-                  </div>
-                    <div class="col-md-6">
+                     <div class="col-md-2">
                         <!--  COL MD 6 001-->
 
                         <div class="menu-item color-doctor"> <!-- DIV CLASS MENU ITEM BLUE--DOCTORES -->
 
-                            <a href="buscar_doctor.html" >
-                                <i class="fa fa-search"></i>
-                                <h3>Buscar un doctor</h3>
+                            <a href="doctores.html" >
+                                <i class="fa fa-user-md"></i>
+                                <h3>Doctores</h3>
                             </a>
                         </div> 
                         <!-- FIN DIV CLASS MENU ITEM  BLUE--DOCTORES -->
                   </div>
+                  </div>
+                <div class="row" ><!-- ROW 001-->
+                     <div class="col-xs-12" >
                   
+                       
+      
+        <h1>Doctores</h1>
+       
+      
+
+   
+
+     <div class="row"  >
+    
+       
+<div class="container" >
+<br>
+
+			
+		</div>
+
+
+
+
+                    </div>
+                        
+                        
                    
+                    </div>
+					
                     <!-- FIN COL MD 6 001-->
                     </div> <!-- FIN ROW 001--> 
                      
-                      
-                    
+                    <br><br> 
                     <div class="row"><!-- ROW 001-->
                     
                     <div class="col-md-3">

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
-    <head>
+<html lang="es"><head>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Comparte y busca a los mejores especialistas m茅dicos de tu localidad</title>
+        <title>Comparte y busca a los mejores especialistas m閐icos de tu localidad</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,8 +25,10 @@
        <!-- <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'> -->
         <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 
-
+		
+		
         <!-- Template js -->
+
         <script src="js/jquery-2.1.1.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/jquery.appear.js"></script>
@@ -36,6 +36,20 @@
         <script src="js/jqBootstrapValidation.js"></script>
         <script src="js/modernizr.custom.js"></script>
         <script src="js/script.js"></script>
+        
+        
+
+       
+        <!-- recursos datatable-->
+<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+
+		<link rel="stylesheet" type="text/css" href="css/dataTables.colVis.css">
+<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+
+
+     <script type="text/javascript" language="javascript" >
+	 
+	 </script>
 
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -45,21 +59,333 @@
     </head>
     
     <body>
-        
+    
+     <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Data</h4>
+            </div>
+            <div class="modal-body">
+                <div class="fetched-data"></div> //Here Will show the Data
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
         <!-- Start Logo Section -->
         <section id="logo-section" class="text-center">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logo text-center">
-                            <h1>Doctores</h1>
-                            <span>Comparte y busca a los mejores especialistas m茅dicos de tu localidad</span>
+                            <h1>Opinar de un doctor</h1>
+                            <span>Comparte y busca a los mejores especialistas m閐icos de tu localidad</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- End Logo Section -->
+        
+        
+        
+        <div class="container">
+  
+  <h2>Opinar de un doctor/a:</h2>
+  <p>Usa este formulario para opinar de un doctor/a:</p>
+  <br>
+   <h4 align="center">Estoy en:<span class="label label-default" id="ciudad"> Estamos localizando tu situaci贸n para darte un mejor servicio...</span>
+              
+                <span class="label label-default" id="estado"></span>
+                
+               
+      <span class="label label-default" id="pais"></span>
+                <br>
+      </h4>
+ <form role="form" method="post" id="reg-form">
+  <div class="row igual ">
+  <div class="col-xs-12">
+   <h4>
+     <label for="name">Especialidad M茅dica del Doctor/a...</label>
+   </h4>
+ </div>
+  	<div class="col-xs-4">
+ <div class="form-group">
+ <label for="name">Especialidades M茅dicas *</label>
+ <select class="form-control"  name"especialidad_elegida" id="especialidad_elegida" onchange="realizarProceso(this)">
+ <option value="0">Selecciona una especialidad</option>
+<?php 
+while ($rowEspecialidades = $resultEspecialidades->fetch_assoc()) {
+        echo "<option value=\"{$rowEspecialidades['id_especialidad']}\">";
+        echo $rowEspecialidades['especialidad'];
+        echo "</option>";
+		
+    }
+?>
+ </select>
+ </div>
+  
+ </div>
+<div class="col-xs-4">
+   		<label for="name">O escribe aqu铆 la especialidad del doctor/a</label> 
+   		**
+   		<input type="text" class="form-control" placeholder="Especialidad M茅dica" name="especialidad_propuesta" id="especialidad_propuesta" >
+  </div>
+  <div class="col-xs-4">
+	  <div align="center">
+	    <p><div id="myDiv"><img id ="imagen" src="iconos_especialidades/nada.jpg"  align="middle"></div></p>
+	    <p>&nbsp;</p>
+	  </div>
+  <br></div><br>
+ </div>
+ <br>
+ <div class="row igual">
+  <div class="col-xs-12">
+   <h4>
+     <label for="name">Datos personales del doctor/a...</label>
+   </h4>
+ </div>
+  	<div class="col-xs-4">
+   		<label for="name">Nombre *</label>
+   		<input type="text" class="form-control" placeholder="Nombre" id="nombre_doctor" name="nombre_doctor">
+  </div>
+  <div class="col-xs-4">
+   <label for="name">Apellido 1</label>
+    *
+    <input type="text" class="form-control" placeholder="Apellido 1" id="apellido1_doctor" name="apellido1_doctor">
+  </div>
+  <div class="col-xs-4">
+   <label for="name">Apellido 2</label>
+    *
+    <input type="text" class="form-control" placeholder="Apellido 2" id="apellido2_doctor" name="apellido2_doctor"> <br>
+  </div>
+   <br>
+</div>
+
+<br>
+ <div class="row igual">
+ <div class="row">
+ <div class="col-xs-8">
+   <h4>
+     <label for="name">Deseas seleccionar tu locaci贸n actual como locaci贸n del doctor/a?</label>
+     
+   </h4>
+ </div>
+ <div class="col-xs-4">
+<input type="checkbox" name="seleccion_local" checked data-on-text="SI" data-off-text="NO" id="seleccion_local" >
+ </div>
+ </div>
+  	<div class="col-xs-4">
+   		<label for="name">Pais</label>
+    	<input type="text" class="form-control" placeholder="Pais" name="pais_local" id="pais_local" readonly>
+  </div>
+  <div class="col-xs-4">
+   <label for="name">Estado</label>
+    <input type="text" class="form-control"  placeholder="Estado" id="estado_local" name="estado_local" readonly>
+  </div>
+  <div class="col-xs-4">
+   <label for="name">Ciudad</label>
+    <input type="text" class="form-control" placeholder="Ciudad" name="ciudad_local" id="ciudad_local"  readonly><br>
+  </div><br>
+</div>
+<br>
+<div class="row diferente">
+ <div class="row">
+ <div class="col-xs-8">
+   <h4>
+     <label for="name">O  deseas seleccionar otra locaci贸n diferente a la tuya actual?</label>
+     
+   </h4>
+ </div>
+  <div class="col-xs-4">
+<input type="checkbox" id="seleccion_elegida" name="seleccion_elegida" data-on-text="SI" data-off-text="NO" >
+ </div>
+ </div>
+  	<div class="col-xs-4">
+   		<label for="name">Pais</label>
+ <select class="form-control countries" id="countryId" name="countryId" >
+ <option>Seleccion Pais</option>
+ 
+ </select>
+  </div>
+  <div class="col-xs-4">
+   		<label for="name">Estado</label>
+ <select class="form-control states" id="stateId" name="stateId">
+ <option>Selecciona Estado</option>
+ 
+ </select>
+  </div>
+  <div class="col-xs-4">
+   		<label for="name">Ciudad</label>
+ <select class="form-control cities" id="cityId" name="cityId">
+ <option>Selecciona Ciudad</option>
+
+ </select><br>
+  </div>
+  </div>
+  <br>
+  <div class="row igual">
+  <div class="col-xs-12">
+   <h4>
+     <label for="name">Direcci贸n del doctor/a...</label>
+   </h4>
+ </div>
+  <div class="col-xs-4">
+   <label for="name">Fraccionamiento/Colonia <small><em>no obligatorio</em></small></label>
+    <input type="text" class="form-control" placeholder="Fraccionamiento" id="fraccionamiento_doctor" name="fraccionamiento_doctor">
+  </div>
+  
+  <div class="col-xs-4">
+   <label for="name">Calle <small><em>no obligatorio</em></small></label>
+    <input type="text" class="form-control" placeholder="Calle" id="direccion_doctor" name="direccion_doctor">
+  </div>
+  
+  <div class="col-xs-3">
+   <label for="name">N煤mero <small><em>no obligatorio</em></small></label>
+    <input type="text" class="form-control" placeholder="N煤mero" id="numero_doctor" name="numero_doctor"><br>
+  </div>
+</div>
+<br>
+ <div class="row igual">
+ <div class="col-xs-12">
+   <h4>
+     <label for="name">Valoraciones...</label>
+   </h4>
+ </div>
+<div class="col-xs-6">
+  <h3>
+  <label for="input-5" class="control-label"><span class="glyphicon glyphicon-time"></span> Puntualidad </label></h3>
+  <h6><input id="input-5" class="rating-loading" data-show-clear="false" data-show-caption="true" data-size="sm">
+  <script>
+$(document).on('ready', function(){
+    $('#input-5').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+ </h6> 
+</div>
+<div class="col-xs-6">
+<h3><label for="input-6" class="control-label"><span class="glyphicon glyphicon-ok"></span> Atenci贸n</label></h3>
+<H6><input id="input-6" class="rating-loading" data-show-clear="false" data-show-caption="true" data-size="sm">
+<script>
+$(document).on('ready', function(){
+    $('#input-6').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+</H6>
+</div>
+</div>
+
+ <div class="row igual">
+<div class="col-xs-6">
+<H3><label for="input-7" class="control-label"><span class="glyphicon glyphicon-home"></span> Instalaciones</label></H3>
+<H6><input id="input-7" class="rating-loading" data-show-clear="false" data-show-caption="true" data-size="sm">
+<script>
+$(document).on('ready', function(){
+    $('#input-7').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+</H6>
+</div>
+<div class="col-xs-6">
+<H3><label for="input-8" class="control-label"><span class="glyphicon glyphicon-usd"></span> Precio</label></H3>
+<H6><input id="input-8" class="rating-loading" data-show-clear="false" data-show-caption="true" data-size="sm"><br>
+<script>
+$(document).on('ready', function(){
+    $('#input-8').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+</H6>
+</div>
+</div>
+<br>
+ <div class="row igual">
+ <div class="col-xs-12">
+   <h4>
+     <label for="name">Valoraci贸n global...</label>
+   </h4>
+ </div>
+<div class="col-xs-12">
+  <h3>
+  <label for="input-9" class="control-label"><span class="glyphicon glyphicon-thumbs-up"></span> Lo recomiendas? </label></h3>
+  <h6><input id="input-9" class="rating-loading" data-show-clear="false" data-show-caption="true" data-size="sm" >
+  <script>
+$(document).on('ready', function(){
+    $('#input-9').rating({clearCaption: 'Sin calificar'});
+});
+</script>
+ </h6> 
+</div>
+
+</div>
+<br>
+ <div class="row igual">
+ 
+ <div class="col-xs-12">
+   <h4>
+     <label for="name">Tus comentarios...</label>
+   </h4><h5><div  id="counter"></div></h5>
+ </div>
+ 	<div class="col-xs-4">
+   		<label for="name">Titulo</label>
+   		<input type="text" class="form-control" placeholder="Titulo de los comentarios" id="titulo" name="titulo">
+  </div>
+<div class="col-xs-12">
+ 
+   	
+   		<label for="name">Comentarios</label>
+  
+   <textarea rows="3" class="form-control" placeholder="Comentarios" id="comentarios" name="comentarios"></textarea><br>
+  
+  </div></div>
+  
+   <br>
+  <div class="row igual">
+  <div class="col-xs-12">
+   <h4>
+     <label for="name">Tus datos de usuario...</label>
+   </h4>
+ </div>
+  <div class="col-xs-6">
+   <label for="name">Nombre de usuario* <small><em>aparecer谩 como autor de la opini贸n</em></small></label>
+    <input type="text" class="form-control" placeholder="Nombre de usuario" name="nombre_ususario" id="nombre_usuario">
+  </div>
+  
+  <div class="col-xs-6">
+   <label for="name">Email* <small><em><strong>NO</strong> aparecer谩 en la opini贸n publicada</em></small></label>
+    <input type="text" class="form-control" placeholder="Email" name="email_usuario" id="email_usuario"><br>
+  </div>
+</div>
+<br>
+<input type="hidden" class="form-control" placeholder="Email" name="ip_usuario" id="ip_usuario">
+<input type="hidden" class="form-control" placeholder="Email" name="id_usuario" id="id_usuario">
+<input type="hidden" class="form-control" placeholder="Email" name="hora_opinion" id="hora_opinion">
+<div class="row igual">
+<div class="col-xs-12">
+<button type="submit"class="btn btn-primary btn-lg"id="submit">
+Enviar OPINION </button>
+</div>
+
+</form>
+ <br></div>
+ 
+ <div class="row igual">
+<div class="col-xs-12">Los campos marcados con * son OBLIGATORIOS.
+</div></div>
+ <br> <br> <br> <br>
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         <!-- Start Main Body Section -->
@@ -79,39 +405,24 @@
                         </div> 
                         <!-- FIN DIV CLASS MENU ITEM  BLUE--DOCTORES -->
                   </div>
-                  </div>
-                <div class="row"><!-- ROW 001-->
-                           <div class="col-md-6">
-                        <!--  COL MD 6 001-->
-
-                        <div class="menu-item color-hospital"> <!-- DIV CLASS MENU ITEM BLUE--DOCTORES -->
-
-                            <a href="opinar_doctor.html" >
-                                <i class="fa fa-comment-o"></i>
-                                <h3>Opinar de un doctor</h3>
-                            </a>
-                        </div> 
-                        <!-- FIN DIV CLASS MENU ITEM  BLUE--DOCTORES -->
-                  </div>
-                    <div class="col-md-6">
+                     <div class="col-md-2">
                         <!--  COL MD 6 001-->
 
                         <div class="menu-item color-doctor"> <!-- DIV CLASS MENU ITEM BLUE--DOCTORES -->
 
-                            <a href="buscar_doctor.html" >
-                                <i class="fa fa-search"></i>
-                                <h3>Buscar un doctor</h3>
+                            <a href="doctores.html" >
+                                <i class="fa fa-user-md"></i>
+                                <h3>Doctores</h3>
                             </a>
                         </div> 
                         <!-- FIN DIV CLASS MENU ITEM  BLUE--DOCTORES -->
                   </div>
-                  
-                   
-                    <!-- FIN COL MD 6 001-->
-                    </div> <!-- FIN ROW 001--> 
-                     
-                      
+                  </div>
+
                     
+                    
+                    
+                     
                     <div class="row"><!-- ROW 001-->
                     
                     <div class="col-md-3">
